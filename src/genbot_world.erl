@@ -44,8 +44,8 @@ get(World, {Line, Row}) ->
 
 set(World, {Line, Row}, Status) ->
 	WorldLine = lists:nth(Line, World),
-	NewWorldLine = exchange(WorldLine, Row, Status),
-	exchange(World, Line, NewWorldLine).
+	NewWorldLine = genbot_utils:exchange(WorldLine, Row, Status),
+	genbot_utils:exchange(World, Line, NewWorldLine).
 
 
 
@@ -93,21 +93,6 @@ show_field(blocked) ->
 	"X";
 show_field(bot) ->
 	"O".
-
-
-exchange(List, Pos, Value) ->
-	exchange(List, Pos, Value, 1, []).
-
-
-exchange([], _Pos, _Value, _N, Acc) ->
-	Acc;
-
-exchange([_ | T], Pos, Value, Pos, Acc) ->
-	exchange(T, Pos, Value, Pos + 1, Acc ++ [Value]);
-
-exchange([H | T], Pos, Value, N, Acc) ->
-	exchange(T, Pos, Value, N + 1, Acc ++ [H]).
-
 
 
 count_fields([], _Status, N) ->
