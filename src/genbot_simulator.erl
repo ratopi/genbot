@@ -67,7 +67,7 @@ print(Results) ->
 sort(Results) ->
 	lists:sort(
 		fun(R1, R2) ->
-			R1 =< R2
+			R1#result.fitness =< R2#result.fitness
 		end,
 		Results
 	).
